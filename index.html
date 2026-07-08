@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Équipe Tarjami — Traduction & Candidature Universités Saoudiennes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:       #faf8f6;
+      --primary:  #926363;
+      --accent:   #458f84;
+      --dark:     #1a1210;
+      --cream:    #f5f0ea;
+      --cream2:   #ede5d8;
+      --warm-mid: #c4a882;
+      --text:     #2a1f1a;
+      --text-muted: #7a6558;
+      --accent-dark: #2e6b62;
+      --primary-light: #b89090;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .section-chip {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 1.2rem;
+    }
+    .section-chip::before { content: '— '; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 50px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s ease;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: #7a5252; transform: translateY(-1px); }
+    .btn-accent { background: var(--accent); color: #fff; }
+    .btn-accent:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn-ghost { background: transparent; color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.3); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+    .btn-arrow::after {
+      content: '↗';
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      font-size: 0.75rem;
+      transition: transform 0.2s ease;
+    }
+    .btn-arrow:hover::after { transform: rotate(0deg) scale(1.1); }
+
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-20px) scale(1.03); }
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.4); }
+    }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fade-up 0.7s ease both; }
+    .fade-up-delay-1 { animation-delay: 0.1s; }
+    .fade-up-delay-2 { animation-delay: 0.2s; }
+    .fade-up-delay-3 { animation-delay: 0.3s; }
+
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 2rem;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(26, 18, 16, 0.75);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .navbar-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #fff; letter-spacing: -0.01em; }
+    .navbar-logo span { color: var(--primary-light); }
+    .navbar-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .navbar-links a { font-size: 0.85rem; font-weight: 400; color: rgba(255,255,255,0.7); letter-spacing: 0.01em; transition: color 0.2s; }
+    .navbar-links a:hover { color: #fff; }
+    .navbar-cta { margin-left: 1rem; }
+    .navbar-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .navbar-hamburger span { width: 24px; height: 1.5px; background: rgba(255,255,255,0.8); display: block; }
+
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; background: var(--dark); }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 20%, rgba(146,99,99,0.35), transparent 55%),
+                  radial-gradient(ellipse at 80% 80%, rgba(69,143,132,0.25), transparent 55%),
+                  linear-gradient(160deg, #241713 0%, #1a1210 60%, #2b1a15 100%);
+    }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(26,18,16,.92) 0%, rgba(143,83,69,.55) 50%, rgba(26,18,16,.85) 100%); }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
+    }
+    .hero-blob-1 { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: #8f5345; opacity: 0.35; filter: blur(72px); top: -100px; right: -100px; animation: float-slow 8s ease-in-out infinite; }
+    .hero-blob-2 { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: #458f84; opacity: 0.20; filter: blur(72px); bottom: -50px; left: -80px; animation: float-slow 11s ease-in-out infinite reverse; }
+    .hero-content { position: relative; z-index: 2; padding: 120px 2rem 80px; max-width: 1200px; margin: 0 auto; width: 100%; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; background: rgba(26, 18, 16, 0.35); backdrop-filter: blur(12px); border: 1px solid rgba(69, 143, 132, 0.25); border-radius: 50px; margin-bottom: 2rem; animation: fade-up 0.6s ease both; }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #458f84; animation: pulse-dot 2s ease-in-out infinite; flex-shrink: 0; }
+    .hero-badge-text { font-size: 0.72rem; font-weight: 400; color: #7ecec6; letter-spacing: 0.01em; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 6vw, 5.2rem); font-weight: 700; color: #fff; line-height: 1.0; letter-spacing: -0.03em; max-width: 760px; margin-bottom: 1.5rem; animation: fade-up 0.7s ease 0.1s both; }
+    .hero-title em { font-style: italic; color: var(--primary-light); }
+    .hero-subtitle { font-size: 1.05rem; color: rgba(255,255,255,0.65); max-width: 480px; line-height: 1.7; margin-bottom: 2.5rem; font-weight: 300; animation: fade-up 0.7s ease 0.2s both; }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem; animation: fade-up 0.7s ease 0.3s both; }
+    .hero-stats { display: flex; gap: 3rem; animation: fade-up 0.7s ease 0.4s both; }
+    .hero-stat-number { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 0.3rem; }
+    .hero-stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; text-transform: uppercase; }
+    .hero-stat-divider { width: 1px; background: rgba(255,255,255,0.15); align-self: stretch; }
+
+    .trust-bar { background: var(--cream); border-top: 1px solid var(--cream2); border-bottom: 1px solid var(--cream2); padding: 2.2rem 0; }
+    .trust-bar-inner { display: flex; justify-content: center; align-items: flex-start; gap: 4rem; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .trust-item { display: flex; align-items: flex-start; gap: 0.9rem; flex-shrink: 0; }
+    .trust-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(146,99,99,0.08); border-radius: 10px; color: var(--primary); flex-shrink: 0; margin-top: 2px; }
+    .trust-icon svg { width: 19px; height: 19px; }
+    .trust-text-title { font-size: 0.88rem; font-weight: 600; color: var(--dark); line-height: 1.35; margin-bottom: 0.15rem; }
+    .trust-text-sub { font-size: 0.78rem; font-weight: 400; color: var(--text-muted); line-height: 1.3; }
+
+    .manifesto { background: #fff; padding: 100px 0; position: relative; overflow: hidden; }
+    .manifesto-blob { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: var(--cream); filter: blur(80px); top: -100px; right: -200px; opacity: 0.8; }
+    .manifesto-blob-2 { position: absolute; width: 300px; height: 300px; border-radius: 50%; background: var(--primary); filter: blur(90px); bottom: -80px; left: -100px; opacity: 0.07; }
+    .manifesto-inner { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .manifesto-quote { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; color: var(--dark); line-height: 1.08; letter-spacing: -0.03em; max-width: 800px; margin-bottom: 1.2rem; }
+    .manifesto-quote em { font-style: italic; color: var(--primary); }
+    .manifesto-sub { font-size: 1rem; color: var(--text-muted); max-width: 560px; line-height: 1.7; margin-bottom: 4rem; }
+    .manifesto-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .manifesto-card { background: var(--cream); border-radius: 4px; padding: 2rem 1.8rem; border-top: 3px solid var(--primary); transition: transform 0.2s, box-shadow 0.2s; }
+    .manifesto-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(146,99,99,0.12); }
+    .manifesto-card-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; color: var(--primary); border: 1.5px solid rgba(146,99,99,0.3); border-radius: 50%; }
+    .manifesto-card-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--dark); margin-bottom: 0.5rem; }
+    .manifesto-card-text { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+    .features-pricing { background: var(--cream); padding: 100px 0; }
+    .fp-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .fp-header { margin-bottom: 4rem; max-width: 680px; }
+    .fp-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; color: var(--dark); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 0.8rem; }
+    .fp-sub { font-size: 1rem; color: var(--text-muted); line-height: 1.7; }
+    .fp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .fp-features h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; color: var(--dark); margin-bottom: 1.5rem; }
+    .fp-feature-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+    .fp-feature-item { display: flex; align-items: flex-start; gap: 0.85rem; }
+    .fp-check { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.15rem; color: #fff; }
+    .fp-check svg { width: 12px; height: 12px; }
+    .fp-feature-item-text { font-size: 0.92rem; color: var(--text); line-height: 1.4; }
+    .fp-feature-item-text strong { font-weight: 600; }
+    .fp-feature-item-sub { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin-top: 0.15rem; }
+    .pricing-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .pricing-card { background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: 12px; padding: 1.4rem 1.8rem; position: relative; transition: box-shadow 0.2s; }
+    .pricing-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+    .pricing-badge { position: absolute; top: -13px; right: 1.5rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.85rem; border-radius: 20px; display: flex; align-items: center; gap: 0.3rem; }
+    .pricing-card-top { display: flex; justify-content: space-between; align-items: center; }
+    .pricing-card-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--dark); display: block; margin-bottom: 0.15rem; }
+    .pricing-card-price { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--primary); line-height: 1; white-space: nowrap; }
+    .pricing-card-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
+
+    .process { background: var(--dark); padding: 100px 0; position: relative; overflow: hidden; }
+    .process-blob-1 { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: var(--primary); opacity: 0.07; filter: blur(100px); top: -150px; right: -100px; }
+    .process-blob-2 { position: absolute; width: 350px; height: 350px; border-radius: 50%; background: var(--accent); opacity: 0.07; filter: blur(80px); bottom: -80px; left: 0; }
+    .process-inner { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .process-header { margin-bottom: 4rem; max-width: 560px; }
+    .process-header .section-chip { color: var(--accent); }
+    .process-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; color: #fff; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 0.8rem; }
+    .process-sub { font-size: 0.95rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+    .process-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
+    .process-steps::before { content: ''; position: absolute; top: 28px; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0.15) 80%, transparent); z-index: 0; }
+    .process-step { position: relative; z-index: 1; padding: 0 1.2rem; text-align: center; }
+    .process-step-circle { width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; color: rgba(255,255,255,0.6); transition: all 0.3s; }
+    .process-step:hover .process-step-circle { background: rgba(146,99,99,0.2); border-color: var(--primary); color: var(--primary-light); }
+    .process-step-title { font-size: 0.88rem; font-weight: 600; color: rgba(255,255,255,0.85); margin-bottom: 0.5rem; line-height: 1.4; }
+    .process-step-tag { display: inline-block; background: rgba(69,143,132,0.15); color: var(--accent); border: 1px solid rgba(69,143,132,0.2); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.04em; padding: 0.2rem 0.55rem; border-radius: 20px; text-transform: uppercase; }
+
+    .about { background: var(--bg); padding: 100px 0; }
+    .about-inner { max-width: 640px; margin: 0 auto; padding: 0 2rem; text-align: center; }
+    .about-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: var(--dark); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+    .about-text { font-size: 1rem; color: #8b5e3c; line-height: 1.8; margin-bottom: 1.2rem; }
+    .about-text em { font-style: italic; color: var(--primary); }
+
+    .freebie { background: var(--accent-dark); padding: 100px 0; position: relative; overflow: hidden; }
+    .freebie-blob { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: rgba(255,255,255,0.1); filter: blur(70px); top: -80px; right: 10%; }
+    .freebie-inner { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .freebie-left .section-chip { color: rgba(255,255,255,0.6); }
+    .freebie-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: #fff; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 0.8rem; }
+    .freebie-sub { font-size: 0.95rem; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 1.8rem; }
+    .freebie-benefits { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2.5rem; }
+    .freebie-benefit { display: flex; align-items: center; gap: 0.7rem; font-size: 0.88rem; color: rgba(255,255,255,0.8); }
+    .freebie-benefit-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.5); flex-shrink: 0; }
+    .freebie-form { display: flex; gap: 0.8rem; }
+    .freebie-right { display: flex; justify-content: center; align-items: center; }
+
+    .faq { background: var(--cream); padding: 100px 0; }
+    .faq-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 320px 1fr; gap: 5rem; align-items: start; }
+    .faq-sidebar-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; color: var(--dark); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .faq-sidebar-sub { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem; }
+    .faq-item { border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .faq-question { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 0; cursor: pointer; font-size: 0.95rem; font-weight: 500; color: var(--dark); gap: 1rem; transition: color 0.2s; }
+    .faq-question:hover { color: var(--primary); }
+    .faq-icon { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.2rem; font-weight: 300; color: var(--text-muted); transition: all 0.2s; }
+    .faq-answer { display: none; font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; padding-bottom: 1.2rem; max-width: 580px; }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item.open .faq-icon { background: var(--primary); border-color: var(--primary); color: #fff; transform: rotate(45deg); }
+    .faq-item.open .faq-question { color: var(--primary); }
+
+    .contact { background: var(--primary); padding: 100px 0 80px; position: relative; overflow: hidden; }
+    .contact-mega-logo { position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%); font-family: 'Playfair Display', serif; font-size: clamp(80px, 18vw, 240px); font-weight: 900; color: rgba(255,255,255,0.05); white-space: nowrap; letter-spacing: -0.03em; user-select: none; pointer-events: none; }
+    .contact-blob-1 { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: rgba(26,18,16,0.3); filter: blur(80px); top: -100px; right: -100px; }
+    .contact-blob-2 { position: absolute; width: 350px; height: 350px; border-radius: 50%; background: rgba(255,255,255,0.1); filter: blur(70px); bottom: 0; left: -80px; }
+    .contact-inner { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; padding: 0 2rem; text-align: center; }
+    .contact-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; color: #fff; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 0.8rem; }
+    .contact-sub { font-size: 0.95rem; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 3rem; }
+    .contact-form { background: rgba(255,255,255,0.1); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 2.5rem; text-align: left; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; color: rgba(255,255,255,0.6); text-transform: uppercase; margin-bottom: 0.4rem; }
+    .form-group input, .form-group textarea {
+      width: 100%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 3px; padding: 0.85rem 1rem;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: #fff; outline: none; transition: border-color 0.2s;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+    .form-group input:focus, .form-group textarea:focus { border-color: rgba(255,255,255,0.5); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-upload { position: relative; border: 1.5px dashed rgba(255,255,255,0.25); border-radius: 4px; padding: 1.5rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; margin-bottom: 1.5rem; }
+    .form-upload:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05); }
+    .form-upload-icon { color: rgba(255,255,255,0.5); margin-bottom: 0.5rem; }
+    .form-upload-text { font-size: 0.83rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+    .form-upload-text strong { color: rgba(255,255,255,0.85); }
+    .form-submit { width: 100%; justify-content: center; font-size: 0.95rem; padding: 1rem; }
+    .contact-trust { margin-top: 1.5rem; font-size: 0.78rem; color: rgba(255,255,255,0.45); letter-spacing: 0.03em; }
+    .form-feedback { margin-top: 1rem; font-size: 0.85rem; text-align: center; display: none; }
+    .form-feedback.show { display: block; }
+    .form-feedback.ok { color: #a8e0d8; }
+    .form-feedback.err { color: #f5b0a8; }
+
+    .footer { background: var(--dark); padding: 60px 0 40px; position: relative; overflow: hidden; }
+    .footer-mega { text-align: center; font-family: 'Playfair Display', serif; font-size: clamp(60px, 15vw, 200px); font-weight: 900; color: rgba(255,255,255,0.04); letter-spacing: -0.03em; line-height: 1; user-select: none; pointer-events: none; margin-bottom: -0.15em; }
+    .footer-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .footer-top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 2rem; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: rgba(255,255,255,0.8); }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { font-size: 0.83rem; color: rgba(255,255,255,0.45); transition: color 0.2s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.85); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+    .footer-tagline { font-family: 'Playfair Display', serif; font-size: 0.85rem; font-style: italic; color: rgba(255,255,255,0.25); }
+
+    @media (max-width: 768px) {
+      .navbar-links, .navbar-cta { display: none; }
+      .navbar-hamburger { display: flex; }
+      .hero-stats { gap: 1.5rem; }
+      .hero-ctas { flex-direction: column; }
+      .hero-ctas .btn { width: 100%; justify-content: center; }
+      .trust-bar-inner { gap: 1.5rem; justify-content: flex-start; }
+      .manifesto-cards { grid-template-columns: 1fr; }
+      .fp-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .freebie-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .freebie-right { display: none; }
+      .freebie-form { flex-direction: column; }
+      .faq-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+      .contact-mega-logo { font-size: 50vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <svg viewBox="0 0 180 36" height="32" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="4" width="3" height="28" rx="1.5" fill="#926363"/>
+        <text x="10" y="26" font-family="Georgia, 'Times New Roman', serif" font-size="22px" font-weight="700" fill="#ffffff" letter-spacing="0.04em">Tarjami<tspan fill="#b89090">.</tspan></text>
+      </svg>
+    </div>
+    <ul class="navbar-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="btn btn-accent navbar-cta">Contact</a>
+    <div class="navbar-hamburger"><span></span><span></span><span></span></div>
+  </nav>
+
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-blob-1"></div>
+    <div class="hero-blob-2"></div>
+    <div class="hero-content container">
+      <div class="hero-badge fade-up">
+        <span class="hero-badge-dot"></span>
+        <span class="hero-badge-text">Équipe 100% féminine · Diplômées en Arabie Saoudite</span>
+      </div>
+      <h1 class="hero-title">Tu veux étudier en <em style="color:#c9a96e">Arabie Saoudite</em> mais les démarches te bloquent</h1>
+      <p class="hero-subtitle">Traduction officielle de tes documents + dossier conforme. Tu te concentres sur ton projet, on s'occupe du reste.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary btn-arrow">Traduire mes documents maintenant</a>
+        <a href="#process" class="btn btn-ghost">Voir comment ça marche</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat-item"><div class="hero-stat-number" style="color:#fff">250<span style="color:#c9a96e">+</span></div><div class="hero-stat-label">Étudiants accompagnés</div></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat-item"><div class="hero-stat-number">72<span style="color:#c9a96e">h</span></div><div class="hero-stat-label">Délai minimum</div></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat-item"><div class="hero-stat-number">100<span style="color:#c9a96e">%</span></div><div class="hero-stat-label">Documents conformes</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust-bar">
+    <div class="trust-bar-inner">
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg></div>
+        <div><div class="trust-text-title">Équipe diplômée en Arabie</div><div class="trust-text-sub">Université Princesse Nourah</div></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/></svg></div>
+        <div><div class="trust-text-title">Traductions officielles<br>conformes</div><div class="trust-text-sub">Tampons officiels inclus</div></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg></div>
+        <div><div class="trust-text-title">Équipe 100% féminine</div><div class="trust-text-sub">Disponible 7j/7</div></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+        <div><div class="trust-text-title">Procédures maîtrisées</div><div class="trust-text-sub">Sur le terrain depuis 2023</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="manifesto">
+    <div class="manifesto-blob"></div>
+    <div class="manifesto-blob-2"></div>
+    <div class="manifesto-inner">
+      <span class="section-chip">Le vrai problème</span>
+      <h2 class="manifesto-quote">« Je ne sais pas comment postuler.<br><em>J'ai peur de mal faire.</em> »</h2>
+      <p class="manifesto-sub">Ces mots, on les entend chaque semaine. Le rêve d'étudier en Arabie est là — mais entre les docs à traduire et les procédures que personne n'explique, beaucoup abandonnent.</p>
+      <div class="manifesto-cards">
+        <div class="manifesto-card">
+          <div class="manifesto-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 10h8M8 14h5"/></svg></div>
+          <h3 class="manifesto-card-title">Traductions non conformes</h3>
+          <p class="manifesto-card-text">Les universités saoudiennes exigent un format précis avec tampon officiel — un simple document Google Translate ne suffit pas et fera rejeter ton dossier.</p>
+        </div>
+        <div class="manifesto-card">
+          <div class="manifesto-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5c.3-.9 1.2-1.5 2.5-1.5 1.5 0 2.5.9 2.5 2 0 1-.7 1.7-1.8 2-.3.1-.7.4-.7.9"/><circle cx="12" cy="16.5" r=".5" fill="currentColor"/></svg></div>
+          <h3 class="manifesto-card-title">Quelle université choisir ?</h3>
+          <p class="manifesto-card-text">Princesse Nourah, Oum Al Qoura, Imam Muhammad... Chaque université a ses critères d'admission, ses deadlines, ses spécificités. Sans guide, tu tournes en rond.</p>
+        </div>
+        <div class="manifesto-card">
+          <div class="manifesto-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg></div>
+          <h3 class="manifesto-card-title">Mauvaises informations partout</h3>
+          <p class="manifesto-card-text">Les groupes Telegram, les tutos YouTube — les infos sont souvent fausses ou obsolètes. Résultat : des semaines perdues et un dossier invalidé.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about-inner">
+      <span class="section-chip">Qui sommes-nous</span>
+      <h2 class="about-title">Une équipe qui connaît le système de l'intérieur</h2>
+      <p class="about-text">Tarjami, c'est une équipe 100% féminine, toutes diplômées d'universités saoudiennes. On a vécu exactement ce que tu vis : la paperasse, l'arabe administratif, les dossiers incomplets, les refus incompréhensibles. Alors on a créé le service qu'on aurait voulu avoir à l'époque.</p>
+      <p class="about-text"><em>Toutes diplômées ici, en Arabie Saoudite</em> — prend en charge votre dossier de A à Z. Traduction conforme, constitution du dossier, postulation complète. On connaît le système. On travaille pour vous.</p>
+    </div>
+  </section>
+
+  <section class="features-pricing" id="services">
+    <div class="fp-inner">
+      <div class="fp-header">
+        <span class="section-chip">Nos services</span>
+        <h2 class="fp-title">On traduit, on corrige, on tamponne — <em style="font-style:italic; color:var(--primary)">et on postule pour toi</em></h2>
+        <p class="fp-sub">Fini de galérer seul. Tu envoies tes docs, on s'occupe de tout : traduction officielle + postulation complète.</p>
+      </div>
+      <div class="fp-grid">
+        <div class="fp-features">
+          <ul class="fp-feature-list">
+            <li class="fp-feature-item"><div class="fp-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 6l3 3 5-5"/></svg></div><div><div class="fp-feature-item-text"><strong>Traduction conforme et officielle</strong></div><div class="fp-feature-item-sub">Par des traductrices diplômées, spécialisées dans les documents administratifs.</div></div></li>
+            <li class="fp-feature-item"><div class="fp-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 6l3 3 5-5"/></svg></div><div><div class="fp-feature-item-text"><strong>Double correction systématique</strong></div><div class="fp-feature-item-sub">Chaque document est relu par une seconde personne avant envoi.</div></div></li>
+            <li class="fp-feature-item"><div class="fp-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 6l3 3 5-5"/></svg></div><div><div class="fp-feature-item-text"><strong>Tampon officiel inclus</strong></div><div class="fp-feature-item-sub">Requis par les universités saoudiennes — on s'en charge pour toi.</div></div></li>
+            <li class="fp-feature-item"><div class="fp-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 6l3 3 5-5"/></svg></div><div><div class="fp-feature-item-text"><strong>Postulation optionnelle</strong></div><div class="fp-feature-item-sub">Tu peux ajouter la postulation complète à ton dossier — on gère tout.</div></div></li>
+            <li class="fp-feature-item"><div class="fp-check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 6l3 3 5-5"/></svg></div><div><div class="fp-feature-item-text"><strong>Résultat en minimum 72h</strong></div><div class="fp-feature-item-sub">Des délais clairs, tenus, sans surprise.</div></div></li>
+          </ul>
+          <a href="#contact" class="btn btn-accent btn-arrow" style="margin-top:2rem">Obtenir mes traductions</a>
+        </div>
+        <div class="pricing-cards">
+          <div class="pricing-card"><span class="pricing-card-name" style="display:block; margin-bottom:0.8rem;">Documents à l'unité</span><p class="pricing-card-desc">Casier judiciaire 18€ · Diplôme bac 20€ · Relevé de notes 24€ · Autre document sur devis</p></div>
+          <div class="pricing-card featured" style="background:var(--primary); border-color:var(--primary);">
+            <div class="pricing-badge" style="background:#c9a96e; color:#1a1210;">POPULAIRE</div>
+            <div class="pricing-card-top"><div><span class="pricing-card-name" style="color:#fff; font-family:'Playfair Display',serif;">Formule complète</span><div class="pricing-card-desc" style="color:rgba(255,255,255,0.65)">Traduction + Postulation</div></div><div class="pricing-card-price" style="color:#fff; font-size:3rem;"><sup style="font-size:1.1rem;vertical-align:super">€</sup>80</div></div>
+          </div>
+          <div class="pricing-card" style="background:var(--cream2);"><div class="pricing-card-top"><div><span class="pricing-card-name">Postulation seule</span><div class="pricing-card-desc">Si tu as déjà les traductions</div></div><div class="pricing-card-price"><sup style="font-size:1rem;vertical-align:super">€</sup>25</div></div></div>
+          <div class="pricing-card"><div class="pricing-card-top"><div><span class="pricing-card-name">Vérification de dossier</span><div class="pricing-card-desc">Tu as rempli ton dossier mais tu veux être sûr</div></div><div class="pricing-card-price"><sup style="font-size:1rem;vertical-align:super">€</sup>10</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process" id="process">
+    <div class="process-blob-1"></div>
+    <div class="process-blob-2"></div>
+    <div class="process-inner">
+      <div class="process-header">
+        <span class="section-chip">Comment ça marche</span>
+        <h2 class="process-title">De tes documents à ta candidature,<br>en 4 étapes</h2>
+        <p class="process-sub">Pas besoin de comprendre l'administration saoudienne — c'est notre travail.</p>
+      </div>
+      <div class="process-steps">
+        <div class="process-step"><div class="process-step-circle" style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:rgba(255,255,255,0.8);">1</div><div><div class="process-step-title">Tu nous envoies tes documents originaux</div><div class="process-step-tag">Immédiat</div></div></div>
+        <div class="process-step"><div class="process-step-circle" style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:rgba(255,255,255,0.8);">2</div><div><div class="process-step-title">On s'occupe de la traduction</div><div class="process-step-tag">24-48h</div></div></div>
+        <div class="process-step"><div class="process-step-circle" style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:rgba(255,255,255,0.8);">3</div><div><div class="process-step-title">On t'envoie tes documents traduits en PDF</div><div class="process-step-tag">Inclus</div></div></div>
+        <div class="process-step"><div class="process-step-circle" style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:rgba(255,255,255,0.8);">4</div><div><div class="process-step-title">Tu postules, ou on s'en occupe pour toi</div><div class="process-step-tag">72h max</div></div></div>
+        <div class="process-step"><div class="process-step-circle" style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:rgba(255,255,255,0.8);">5</div><div><div class="process-step-title">Postulation envoyée</div><div class="process-step-tag">Optionnel</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="freebie">
+    <div class="freebie-blob"></div>
+    <div class="freebie-inner">
+      <div class="freebie-left">
+        <span class="section-chip">Guide gratuit</span>
+        <h2 class="freebie-title">Le Guide de l'étudiant en Arabie Saoudite</h2>
+        <p class="freebie-sub">Universités francophones, bourses, vie étudiante — arrête de chercher partout des infos éparpillées.</p>
+        <ul class="freebie-benefits">
+          <li class="freebie-benefit"><span class="freebie-benefit-dot"></span>De l'inscription en ligne jusqu'à l'installation sur place</li>
+          <li class="freebie-benefit"><span class="freebie-benefit-dot"></span>Universités, bourses, visa, vie quotidienne</li>
+          <li class="freebie-benefit"><span class="freebie-benefit-dot"></span>La liste des meilleures universités</li>
+        </ul>
+        <div class="freebie-form"><a href="https://tarjami-agency.systeme.io/leguide" target="_blank" class="btn btn-primary btn-arrow">Recevoir le guide</a></div>
+      </div>
+      <div class="freebie-right">
+        <div style="position:relative; max-width:280px; width:100%;">
+          <div style="position:absolute; bottom:-4px; left:6px; right:-6px; height:100%; background:#4a2424; border-radius:8px; z-index:0;"></div>
+          <div style="position:absolute; bottom:-2px; left:3px; right:-3px; height:100%; background:#512828; border-radius:8px; z-index:1;"></div>
+          <div style="position:absolute; bottom:-16px; left:10%; right:10%; height:20px; background:rgba(0,0,0,0.3); filter:blur(12px); border-radius:50%; z-index:0;"></div>
+          <div style="position:relative; z-index:3; background:#5c2d2d; border-radius:8px; padding:0; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.5); transform:rotate(2deg);">
+            <div style="background:#458f84; height:8px; width:100%;"></div>
+            <div style="padding:2rem 1.8rem 2.5rem;">
+              <p style="font-family:'DM Sans',sans-serif; font-size:0.7rem; font-weight:600; color:rgba(235,210,185,0.7); letter-spacing:0.08em; margin-bottom:2.5rem;">By Tarjami.fr</p>
+              <h2 style="font-family:'DM Sans',sans-serif; font-size:2.2rem; font-weight:900; color:#e8d5c0; line-height:1.0; letter-spacing:-0.02em; margin-bottom:0.8rem;">Étudier en<br>Arabie<br>Saoudite</h2>
+              <p style="font-family:'Playfair Display',serif; font-size:1.1rem; font-style:italic; color:#c9a96e; margin-bottom:3rem;">Le guide complet.</p>
+              <div style="border-top:1px solid rgba(235,210,185,0.2); padding-top:1rem;">
+                <p style="font-family:'DM Sans',sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:0.12em; color:#c9a96e; margin-bottom:0.5rem; text-transform:uppercase;">Contenu du guide :</p>
+                <p style="font-family:'DM Sans',sans-serif; font-size:0.68rem; font-weight:600; color:rgba(235,210,185,0.8); line-height:1.6;">Inscription · Documents · Visa<br>Vie quotidienne · Conseils</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="faq-inner">
+      <div class="faq-sidebar">
+        <span class="section-chip">Questions fréquentes</span>
+        <h2 class="faq-sidebar-title">Ce que tu te demandes avant de te lancer</h2>
+        <p class="faq-sidebar-sub">Les vraies questions qu'on nous pose chaque semaine.</p>
+        <a href="#contact" class="btn btn-primary btn-arrow">Commencer maintenant</a>
+      </div>
+      <div class="faq-accordion" id="faqAccordion">
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Vos traductions sont-elles acceptées par toutes les universités saoudiennes ?<span class="faq-icon">+</span></div><div class="faq-answer">Oui. Nos traductions respectent le format exigé par les universités saoudiennes reconnu officiellement (Princesse Nourah, Oum Al Qoura, Imam Muhammad, Ibn Saud, et autres). Chaque traduction est tamponnée et signée.</div></div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Que se passe-t-il s'il y a une erreur dans ma traduction ?<span class="faq-icon">+</span></div><div class="faq-answer">On corrige gratuitement et rapidement. Notre process de double correction limite les erreurs à la source, mais si tu constates une erreur, on retraduit sans frais supplémentaires.</div></div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">L'équipe est féminine — est-ce un problème si je suis un homme ?<span class="faq-icon">+</span></div><div class="faq-answer">Absolument pas. Nous accompagnons des étudiants et des étudiantes sans distinction. Notre équipe 100% féminine est une force, pas une limite — elle connaît le système universitaire saoudien de l'intérieur.</div></div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Puis-je commander une traduction sans la postulation ?<span class="faq-icon">+</span></div><div class="faq-answer">Oui, tout à fait. Tu peux commander uniquement la traduction (à l'unité ou en pack), et gérer toi-même ta candidature. La postulation est une option, pas une obligation.</div></div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Quel est le délai réel de livraison ?<span class="faq-icon">+</span></div><div class="faq-answer">Entre 2 à 5 jours après réception de tous tes documents. Pour les dossiers complets (pack traduction + candidature), comptez 8-10 jours ouvrés. En période de rush, nous te prévenons si un délai supplémentaire s'applique.</div></div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Quels autres documents pouvez-vous traduire ?<span class="faq-icon">+</span></div><div class="faq-answer">Casier judiciaire, diplôme du bac, relevé de notes, acte de naissance, certificat de scolarité, et tout autre document administratif français. On traduit aussi les tazkiya, lettres de motivation, lettres de recommandation, et tout autre document pouvant booster votre dossier. Contactez-nous pour un devis sur mesure.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="contact-blob-1"></div>
+    <div class="contact-blob-2"></div>
+    <div class="contact-mega-logo">TARJAMI</div>
+    <div class="contact-inner">
+      <span class="section-chip" style="color:rgba(255,255,255,0.5)">Nous contacter</span>
+      <h2 class="contact-title">Ton dossier est à portée de main.<br><em style="font-style:italic">Il ne manque que toi.</em></h2>
+      <p class="contact-sub">Des centaines d'étudiants ont déjà franchi le pas. Tes documents peuvent être prêts dans 72h.</p>
+      <form class="contact-form" id="tarjamiContactForm">
+        <p style="display:none"><input name="bot-field"></p>
+        <div class="form-row">
+          <div class="form-group"><label for="nom">Nom complet</label><input type="text" id="nom" name="nom" placeholder="Ton prénom et nom" required></div>
+          <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="ton@email.com" required></div>
+        </div>
+        <div class="form-group"><label for="telephone">Téléphone</label><input type="tel" id="telephone" name="telephone" placeholder="+33 6 00 00 00 00"></div>
+        <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" placeholder="Dis-nous ce dont tu as besoin : quels documents traduire, quelle université tu vises..."></textarea></div>
+        <div class="form-upload">
+          <div class="form-upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" width="32"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg></div>
+          <div class="form-upload-text"><strong>Dépose tes fichiers ici</strong> ou clique pour parcourir<br>PDF uniquement · Jusqu'à 10 fichiers · 10 MB max par fichier</div>
+          <input type="file" name="documents" accept=".pdf" multiple style="position:absolute; inset:0; opacity:0; cursor:pointer;">
+        </div>
+        <button type="submit" class="btn btn-accent btn-arrow form-submit">Envoyer mes documents</button>
+        <p class="form-feedback" id="formFeedback"></p>
+        <p class="contact-trust">Paiement sécurisé · Réponse sous 24h · Résultat conforme garanti</p>
+        <p style="text-align:center; margin-top:1rem;"><a href="mailto:contact@tarjami.fr" style="color:rgba(255,255,255,0.7); font-size:0.9rem; font-weight:500; text-decoration:none; letter-spacing:0.01em;">contact@tarjami.fr</a></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-mega">TARJAMI</div>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-logo">
+          <svg viewBox="0 0 180 36" height="28" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="4" width="3" height="28" rx="1.5" fill="#926363"/><text x="10" y="26" font-family="Georgia, 'Times New Roman', serif" font-size="22px" font-weight="700" fill="rgba(255,255,255,0.8)" letter-spacing="0.04em">Tarjami<tspan fill="#926363">.</tspan></text></svg>
+        </div>
+        <ul class="footer-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">À propos</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Équipe Tarjami · Tous droits réservés · <a href="mailto:contact@tarjami.fr" style="color:rgba(255,255,255,0.45); text-decoration:none;">contact@tarjami.fr</a></span>
+        <div style="display:flex; gap:1rem; align-items:center;">
+          <a href="https://www.instagram.com/tarjami.agency/" target="_blank" style="width:36px; height:36px; border-radius:50%; border:1px solid rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.45);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></a>
+          <a href="mailto:contact@tarjami.fr" style="width:36px; height:36px; border-radius:50%; border:1px solid rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.45);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></a>
+        </div>
+        <span class="footer-tagline">Études en Arabie Saoudite, sans frontières.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Config : URL de l'API du CRM Tarjami (déployé indépendamment de ce site)
+    var CRM_WEBHOOK_URL = "https://tarjamicrm.vercel.app/api/webhook/lead";
+
+    function toggleFaq(el) {
+      var item = el.parentElement;
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function (i) { i.classList.remove('open'); });
+      if (!isOpen) item.classList.add('open');
+    }
+
+    window.addEventListener('scroll', function () {
+      var navbar = document.querySelector('.navbar');
+      navbar.style.background = window.scrollY > 60 ? 'rgba(26, 18, 16, 0.95)' : 'rgba(26, 18, 16, 0.75)';
+    });
+
+    var form = document.getElementById('tarjamiContactForm');
+    var feedback = document.getElementById('formFeedback');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var submitBtn = form.querySelector('.form-submit');
+      var originalLabel = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Envoi...';
+      feedback.className = 'form-feedback';
+      feedback.textContent = '';
+
+      var formData = new FormData(form);
+      fetch(CRM_WEBHOOK_URL, { method: 'POST', body: formData })
+        .then(function (res) {
+          if (!res.ok) throw new Error('failed');
+          form.reset();
+          feedback.textContent = 'Message envoyé ! On te répond sous 24h.';
+          feedback.className = 'form-feedback show ok';
+        })
+        .catch(function () {
+          feedback.textContent = "Une erreur est survenue — écris-nous directement à contact@tarjami.fr";
+          feedback.className = 'form-feedback show err';
+        })
+        .finally(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalLabel;
+        });
+    });
+  </script>
+</body>
+</html>
