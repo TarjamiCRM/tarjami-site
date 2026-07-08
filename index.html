@@ -322,6 +322,15 @@
 </head>
 <body>
 
+  <div id="maintenance-screen" style="display:none; min-height:100vh; align-items:center; justify-content:center; flex-direction:column; text-align:center; background:var(--dark); padding:2rem;">
+    <div style="font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:700; color:#fff; margin-bottom:1rem;">Tarjami<span style="color:var(--primary-light)">.</span></div>
+    <h1 style="font-family:'Playfair Display',serif; font-size:clamp(1.6rem,4vw,2.4rem); font-weight:700; color:#fff; margin-bottom:1rem;">Site en maintenance</h1>
+    <p style="font-size:1rem; color:rgba(255,255,255,0.6); max-width:420px; line-height:1.7; margin-bottom:2rem;">On revient très vite ! Pour toute urgence, contacte-nous directement.</p>
+    <a href="mailto:contact@tarjami.fr" style="color:#fff; font-weight:600; text-decoration:none;">contact@tarjami.fr</a>
+  </div>
+
+  <div id="site-content">
+
   <nav class="navbar">
     <div class="navbar-logo">
       <svg viewBox="0 0 180 36" height="32" xmlns="http://www.w3.org/2000/svg">
@@ -583,7 +592,18 @@
     </div>
   </footer>
 
+  </div><!-- /#site-content -->
+
   <script>
+    // Interrupteur mode maintenance — passe à true pour cacher le site et n'afficher
+    // que le message "En maintenance", repasse à false pour republier normalement.
+    var MAINTENANCE_MODE = false;
+    if (MAINTENANCE_MODE) {
+      document.getElementById('site-content').style.display = 'none';
+      var m = document.getElementById('maintenance-screen');
+      m.style.display = 'flex';
+    }
+
     // Config : URL de l'API du CRM Tarjami (déployé indépendamment de ce site)
     var CRM_WEBHOOK_URL = "https://tarjamicrm.vercel.app/api/webhook/lead";
 
