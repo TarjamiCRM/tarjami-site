@@ -268,13 +268,15 @@
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
     .form-group { margin-bottom: 1rem; }
     .form-group label { display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; color: rgba(255,255,255,0.6); text-transform: uppercase; margin-bottom: 0.4rem; }
-    .form-group input, .form-group textarea {
+    .form-group input, .form-group textarea, .form-group select {
       width: 100%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 3px; padding: 0.85rem 1rem;
       font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: #fff; outline: none; transition: border-color 0.2s;
     }
     .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
-    .form-group input:focus, .form-group textarea:focus { border-color: rgba(255,255,255,0.5); }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: rgba(255,255,255,0.5); }
     .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-group select { cursor: pointer; }
+    .form-group select option { background: #2b1a14; color: #fff; }
     .form-upload { position: relative; border: 1.5px dashed rgba(255,255,255,0.25); border-radius: 4px; padding: 1.5rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; margin-bottom: 1.5rem; }
     .form-upload:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05); }
     .form-upload-icon { color: rgba(255,255,255,0.5); margin-bottom: 0.5rem; }
@@ -552,6 +554,16 @@
           <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="ton@email.com" required></div>
         </div>
         <div class="form-group"><label for="telephone">Téléphone</label><input type="tel" id="telephone" name="telephone" placeholder="+33 6 00 00 00 00"></div>
+        <div class="form-group">
+          <label for="sujet">Sujet de ta demande</label>
+          <select id="sujet" name="sujet" required>
+            <option value="" disabled selected>Choisis un sujet</option>
+            <option value="traduction">Traduction</option>
+            <option value="postulation">Postulation</option>
+            <option value="devis">Devis personnalisé</option>
+            <option value="autre">Autre question</option>
+          </select>
+        </div>
         <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" placeholder="Dis-nous ce dont tu as besoin : quels documents traduire, quelle université tu vises..."></textarea></div>
         <div class="form-upload">
           <div class="form-upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" width="32"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg></div>
