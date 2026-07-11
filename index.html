@@ -138,10 +138,18 @@
       position: absolute;
       inset: 0;
       background-color: #1a1210;
+      overflow: hidden;
+    }
+    .hero-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
       background-image: url('hero.jpg');
       background-size: cover;
-      background-position: center 72%;
+      background-position: center 75%;
       background-repeat: no-repeat;
+      opacity: 0.25;
+      transform: scaleX(-1);
     }
     .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(26,18,16,.92) 0%, rgba(143,83,69,.55) 50%, rgba(26,18,16,.85) 100%); }
     .hero-grid {
