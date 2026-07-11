@@ -577,10 +577,10 @@
           </select>
         </div>
         <div class="form-group"><label for="message">Message<span class="required-mark">*</span></label><textarea id="message" name="message" placeholder="Dis-nous ce dont tu as besoin : quels documents traduire, quelle université tu vises..." required></textarea></div>
-        <div class="form-upload">
+        <div class="form-upload" id="formUpload">
           <div class="form-upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" width="32"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg></div>
-          <div class="form-upload-text"><strong>Dépose tes fichiers ici</strong> ou clique pour parcourir<br>PDF uniquement · Jusqu'à 10 fichiers · 10 MB max par fichier</div>
-          <input type="file" name="documents" accept=".pdf" multiple style="position:absolute; inset:0; opacity:0; cursor:pointer;">
+          <div class="form-upload-text" id="formUploadText"><strong>Dépose tes fichiers ici</strong> ou clique pour parcourir<br>PDF uniquement · Jusqu'à 10 fichiers · 10 MB max par fichier</div>
+          <input type="file" id="documentsInput" name="documents" accept=".pdf" multiple style="position:absolute; inset:0; opacity:0; cursor:pointer;">
         </div>
         <button type="submit" class="btn btn-accent btn-arrow form-submit">Envoyer ma demande</button>
         <p class="form-feedback" id="formFeedback"></p>
@@ -645,6 +645,43 @@
 
     var form = document.getElementById('tarjamiContactForm');
     var feedback = document.getElementById('formFeedback');
+
+    // The upload zone's copy promises drag-and-drop ("Dépose tes fichiers ici") — this wires
+    // that up for real, plus shows which files got picked (click or drop), since the input
+    // itself gives no visible confirmation on its own.
+    var uploadZone = document.getElementById('formUpload');
+    var documentsInput = document.getElementById('documentsInput');
+    var uploadText = document.getElementById('formUploadText');
+    var uploadTextDefault = uploadText.innerHTML;
+
+    function updateUploadText() {
+      var files = documentsInput.files;
+      if (!files || files.length === 0) {
+        uploadText.innerHTML = uploadTextDefault;
+        return;
+      }
+      var names = Array.prototype.map.call(files, function (f) { return f.name; }).join(', ');
+      uploadText.innerHTML = '<strong>' + files.length + ' fichier' + (files.length > 1 ? 's' : '') + ' sélectionné' + (files.length > 1 ? 's' : '') + '</strong><br>' + names;
+    }
+
+    documentsInput.addEventListener('change', updateUploadText);
+
+    uploadZone.addEventListener('dragover', function (e) {
+      e.preventDefault();
+      uploadZone.style.borderColor = 'rgba(255,255,255,0.5)';
+    });
+    uploadZone.addEventListener('dragleave', function () {
+      uploadZone.style.borderColor = '';
+    });
+    uploadZone.addEventListener('drop', function (e) {
+      e.preventDefault();
+      uploadZone.style.borderColor = '';
+      if (e.dataTransfer.files.length) {
+        documentsInput.files = e.dataTransfer.files;
+        updateUploadText();
+      }
+    });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var submitBtn = form.querySelector('.form-submit');
@@ -659,6 +696,7 @@
         .then(function (res) {
           if (!res.ok) throw new Error('failed');
           form.reset();
+          updateUploadText();
           feedback.textContent = 'Message envoyé ! On te répond sous 24h.';
           feedback.className = 'form-feedback show ok';
         })
