@@ -582,6 +582,7 @@
           <div class="form-upload-text" id="formUploadText"><strong>Dépose tes fichiers ici</strong> ou clique pour parcourir<br>PDF uniquement · Jusqu'à 10 fichiers · 10 MB max par fichier</div>
           <input type="file" id="documentsInput" name="documents" accept=".pdf" multiple style="position:absolute; inset:0; opacity:0; cursor:pointer;">
         </div>
+        <div id="documentsFileList" style="display:flex; flex-direction:column; gap:0.5rem; margin-top:0.75rem;"></div>
         <button type="submit" class="btn btn-accent btn-arrow form-submit">Envoyer ma demande</button>
         <p class="form-feedback" id="formFeedback"></p>
         <p class="contact-trust">Paiement sécurisé · Réponse sous 24h · Résultat conforme garanti</p>
@@ -647,24 +648,72 @@
     var feedback = document.getElementById('formFeedback');
 
     // The upload zone's copy promises drag-and-drop ("Dépose tes fichiers ici") — this wires
-    // that up for real, plus shows which files got picked (click or drop), since the input
-    // itself gives no visible confirmation on its own.
+    // that up for real, and accumulates files across multiple drops/selections (up to 10)
+    // instead of each new pick replacing the last, with a visible removable list.
     var uploadZone = document.getElementById('formUpload');
     var documentsInput = document.getElementById('documentsInput');
-    var uploadText = document.getElementById('formUploadText');
-    var uploadTextDefault = uploadText.innerHTML;
+    var documentsFileList = document.getElementById('documentsFileList');
+    var MAX_DOCUMENTS = 10;
+    var selectedDocuments = [];
 
-    function updateUploadText() {
-      var files = documentsInput.files;
-      if (!files || files.length === 0) {
-        uploadText.innerHTML = uploadTextDefault;
-        return;
-      }
-      var names = Array.prototype.map.call(files, function (f) { return f.name; }).join(', ');
-      uploadText.innerHTML = '<strong>' + files.length + ' fichier' + (files.length > 1 ? 's' : '') + ' sélectionné' + (files.length > 1 ? 's' : '') + '</strong><br>' + names;
+    function syncDocumentsInput() {
+      var dt = new DataTransfer();
+      selectedDocuments.forEach(function (f) { dt.items.add(f); });
+      documentsInput.files = dt.files;
     }
 
-    documentsInput.addEventListener('change', updateUploadText);
+    function renderDocumentsList() {
+      documentsFileList.innerHTML = '';
+      selectedDocuments.forEach(function (file, idx) {
+        var row = document.createElement('div');
+        row.style.cssText = 'display:flex; align-items:center; gap:0.6rem; padding:0.5rem 0.75rem; border-radius:4px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.06); font-size:0.82rem; color:rgba(255,255,255,0.8);';
+
+        var icon = document.createElement('span');
+        icon.textContent = '📄';
+        row.appendChild(icon);
+
+        var name = document.createElement('span');
+        name.textContent = file.name;
+        name.style.cssText = 'flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;';
+        row.appendChild(name);
+
+        var removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.textContent = '✕';
+        removeBtn.setAttribute('aria-label', 'Retirer ' + file.name);
+        removeBtn.style.cssText = 'background:none; border:none; color:rgba(255,255,255,0.5); cursor:pointer; font-size:0.9rem; line-height:1; padding:0.2rem;';
+        removeBtn.addEventListener('click', function () {
+          selectedDocuments.splice(idx, 1);
+          syncDocumentsInput();
+          renderDocumentsList();
+        });
+        row.appendChild(removeBtn);
+
+        documentsFileList.appendChild(row);
+      });
+    }
+
+    function addDocuments(fileList) {
+      for (var i = 0; i < fileList.length && selectedDocuments.length < MAX_DOCUMENTS; i++) {
+        var file = fileList[i];
+        var isDuplicate = selectedDocuments.some(function (existing) {
+          return existing.name === file.name && existing.size === file.size;
+        });
+        if (!isDuplicate) selectedDocuments.push(file);
+      }
+      syncDocumentsInput();
+      renderDocumentsList();
+    }
+
+    function resetDocuments() {
+      selectedDocuments = [];
+      syncDocumentsInput();
+      renderDocumentsList();
+    }
+
+    documentsInput.addEventListener('change', function () {
+      addDocuments(documentsInput.files);
+    });
 
     uploadZone.addEventListener('dragover', function (e) {
       e.preventDefault();
@@ -676,10 +725,7 @@
     uploadZone.addEventListener('drop', function (e) {
       e.preventDefault();
       uploadZone.style.borderColor = '';
-      if (e.dataTransfer.files.length) {
-        documentsInput.files = e.dataTransfer.files;
-        updateUploadText();
-      }
+      if (e.dataTransfer.files.length) addDocuments(e.dataTransfer.files);
     });
 
     form.addEventListener('submit', function (e) {
@@ -696,7 +742,7 @@
         .then(function (res) {
           if (!res.ok) throw new Error('failed');
           form.reset();
-          updateUploadText();
+          resetDocuments();
           feedback.textContent = 'Message envoyé ! On te répond sous 24h.';
           feedback.className = 'form-feedback show ok';
         })
